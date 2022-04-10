@@ -1,6 +1,7 @@
 package com.openclassrooms.cardgame.view;
 
 import com.openclassrooms.cardgame.controller.GameController;
+import com.openclassrooms.cardgame.model.Player;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -40,8 +41,8 @@ public class View {
         System.out.println("[" + number + "] " + playerName + " [" + rank + "][" + suit + "]");
     }
 
-    public void displayWinner(String playerName) {
-        System.out.println(Objects.equals(playerName, "DRAW") ? "It's a draw!" : "The winner is " + playerName + "!");
+    public void displayWinner(Player winner) {
+        System.out.println(winner == null ? "It's a draw!" : "The winner is " + winner.getName() + "!");
     }
 
     public void offerNewGame() {

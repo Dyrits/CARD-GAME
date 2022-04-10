@@ -1,5 +1,6 @@
 package com.openclassrooms.cardgame.controller;
 
+import com.openclassrooms.cardgame.games.GameEvaluator;
 import com.openclassrooms.cardgame.model.Deck;
 import com.openclassrooms.cardgame.model.Player;
 import com.openclassrooms.cardgame.model.PlayingCard;
@@ -14,7 +15,6 @@ public class GameController {
 
     Deck deck;
     List<Player> players;
-    Player winner;
     View view;
     GameState gameState;
 
@@ -81,16 +81,7 @@ public class GameController {
     }
 
     private void calculateOutcome() {
-        List<Integer> cards = new ArrayList<>();
-        for (Player player : players) {
-            cards.add(player.getCard(0).getRank().getValue());
-        }
-        int highestCard = Collections.max(cards);
-        int frequency = Collections.frequency(cards, highestCard);
-        boolean draw = false;
-        if (frequency == 1) { this.winner = players.get(cards.indexOf(highestCard));
-        } else { draw = true; }
-        this.view.displayWinner(draw ? "DRAW" : this.winner.getName());
+        this.view.displayWinner(new GameEvaluator().evaluateWinner(this.players));
         this.gameState = GameState.Rebuilding;
         this.run();
     }
