@@ -4,7 +4,6 @@ import com.openclassrooms.cardgame.game.GameEvaluator;
 import com.openclassrooms.cardgame.model.Deck;
 import com.openclassrooms.cardgame.model.Player;
 import com.openclassrooms.cardgame.model.PlayingCard;
-import com.openclassrooms.cardgame.view.CommandLineView;
 import com.openclassrooms.cardgame.view.GameView;
 
 import java.util.ArrayList;
@@ -98,7 +97,7 @@ public class GameController {
         this.run();
     }
 
-    private void exitGame() {
+    public void exitGame() {
         System.exit(0);
     }
 

@@ -1,7 +1,8 @@
-package com.openclassrooms.cardgame.view;
+package com.openclassrooms.cardgame.view.implementation;
 
 import com.openclassrooms.cardgame.controller.GameController;
 import com.openclassrooms.cardgame.model.Player;
+import com.openclassrooms.cardgame.view.GameView;
 
 import java.util.Scanner;
 
