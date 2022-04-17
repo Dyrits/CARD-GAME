@@ -1,31 +1,31 @@
 package com.openclassrooms.cardgame.controller;
 
-import com.openclassrooms.cardgame.games.GameEvaluator;
+import com.openclassrooms.cardgame.game.GameEvaluator;
 import com.openclassrooms.cardgame.model.Deck;
 import com.openclassrooms.cardgame.model.Player;
 import com.openclassrooms.cardgame.model.PlayingCard;
-import com.openclassrooms.cardgame.view.View;
+import com.openclassrooms.cardgame.view.CommandLineView;
+import com.openclassrooms.cardgame.view.GameView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class GameController {
-    enum GameState { Registering, Calculating, Dealing, Revealing, Rebuilding};
+    enum GameState { Registering, Calculating, Dealing, Revealing, Rebuilding, Exiting};
 
     Deck deck;
     List<Player> players;
-    View view;
+    GameView view;
     GameState gameState;
     GameEvaluator evaluator;
 
-    public GameController(Deck deck, View view, GameEvaluator evaluator) {
+    public GameController(Deck deck, GameView view, GameEvaluator evaluator) {
         super();
         this.deck = deck;
         this.view = view;
         this.players = new ArrayList<Player>();
         this.gameState = GameState.Registering;
-        view.setGameController(this);
+        view.setController(this);
         this.evaluator = evaluator;
     }
 
@@ -46,6 +46,10 @@ public class GameController {
             case Rebuilding:
                 this.rebuildDeck();
                 break;
+            case Exiting:
+                this.exitGame();
+                break;
+
         }
     }
 
@@ -84,14 +88,21 @@ public class GameController {
 
     private void calculateOutcome() {
         this.view.displayWinner(this.evaluator.evaluate(this.players));
-        this.gameState = GameState.Rebuilding;
+        this.view.offerNewGame();
         this.run();
     }
 
     private void rebuildDeck() {
-        this.view.offerNewGame();
         for (Player player : players) { this.deck.returnCardToDeck(player.removeCard()); }
         this.gameState = GameState.Dealing;
         this.run();
+    }
+
+    private void exitGame() {
+        System.exit(0);
+    }
+
+    public void setGameState(String input) {
+        this.gameState = input.toUpperCase().equals("EXIT") ? GameState.Exiting : GameState.Rebuilding;
     }
 }
