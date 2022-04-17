@@ -17,18 +17,20 @@ public class GameController {
     List<Player> players;
     View view;
     GameState gameState;
+    GameEvaluator evaluator;
 
-    public GameController(Deck deck, View view) {
+    public GameController(Deck deck, View view, GameEvaluator evaluator) {
         super();
         this.deck = deck;
         this.view = view;
         this.players = new ArrayList<Player>();
         this.gameState = GameState.Registering;
         view.setGameController(this);
+        this.evaluator = evaluator;
     }
 
     public void run() {
-        switch (gameState) {
+        switch (this.gameState) {
             case Registering:
                 this.registerPlayers();
                 break;
@@ -55,15 +57,15 @@ public class GameController {
     }
 
     public void addPlayer(String playerName) {
-        players.add(new Player(playerName));
-        view.displayPlayerName(this.players.size(), playerName);
+        this.players.add(new Player(playerName));
+        this.view.displayPlayerName(this.players.size(), playerName);
     }
 
     public void dealCards() {
         deck.shuffle();
-        for (Player player : players) {
-            player.draw(deck.draw());
-            view.showCard(players.indexOf(player) + 1, player.getName());
+        for (Player player : this.players) {
+            player.draw(this.deck.draw());
+            this.view.showCard(this.players.indexOf(player) + 1, player.getName());
         }
         this.gameState = GameState.Revealing;
         this.run();
@@ -71,24 +73,24 @@ public class GameController {
 
     public void flipCards() {
         this.view.confirmFlip();
-        for (Player player : players) {
+        for (Player player : this.players) {
             PlayingCard card = player.getCard(0);
             card.flip();
-            this.view.revealCard(players.indexOf(player) + 1, player.getName(), card.getRank().toString(), card.getSuit().toString());
+            this.view.revealCard(this.players.indexOf(player) + 1, player.getName(), card.getRank().toString(), card.getSuit().toString());
         }
         this.gameState = GameState.Calculating;
         this.run();
     }
 
     private void calculateOutcome() {
-        this.view.displayWinner(new GameEvaluator().evaluateWinner(this.players));
+        this.view.displayWinner(this.evaluator.evaluate(this.players));
         this.gameState = GameState.Rebuilding;
         this.run();
     }
 
     private void rebuildDeck() {
         this.view.offerNewGame();
-        for (Player player : players) { deck.returnCardToDeck(player.removeCard()); }
+        for (Player player : players) { this.deck.returnCardToDeck(player.removeCard()); }
         this.gameState = GameState.Dealing;
         this.run();
     }
