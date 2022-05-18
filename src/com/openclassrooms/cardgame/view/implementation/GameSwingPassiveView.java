@@ -7,13 +7,12 @@ import com.openclassrooms.cardgame.view.GameView;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameSwingView implements GameView {
-
+public class GameSwingPassiveView implements GameView {
     GameController controller;
     JTextArea textArea;
     JFrame frame;
 
-    public GameSwingView() { this.createAndShowGUI(); }
+    public GameSwingPassiveView() { this.createAndShowGUI(); }
 
     public void createAndShowGUI() {
         this.frame = new JFrame("MVC-SOLID-Game");
@@ -42,24 +41,16 @@ public class GameSwingView implements GameView {
         this.textArea.setCaretPosition(this.textArea.getDocument().getLength());
     }
 
-
     @Override
     public void setController(GameController controller) { this.controller = controller; }
 
     @Override
     public void getPlayerName() {
-        int option = 0;
-        while (option != JOptionPane.NO_OPTION) {
-            String result = (String) JOptionPane.showInputDialog(this.frame, "Enter a new player name:", "Registration",
-                    JOptionPane.PLAIN_MESSAGE, null, null, "");
-            if(result == null || result.isEmpty()) { this.controller.exitGame(); }
-            this.controller.addPlayer(result);
-            option = JOptionPane.showConfirmDialog(frame, "Do you want to add another player?", "Registration (+)", JOptionPane.YES_NO_OPTION);
-        }
+        appendText("Waiting for player name ...");
     }
 
     @Override
-    public void confirmFlip() { }
+    public void confirmFlip() {}
 
     @Override
     public void displayPlayerName(int number, String playerName) { appendText("[" + number + "][" + playerName + "]"); }
@@ -78,8 +69,5 @@ public class GameSwingView implements GameView {
     }
 
     @Override
-    public void offerNewGame() {
-        int newGame = JOptionPane.showConfirmDialog(frame, "Play again ?", "Play again", JOptionPane.YES_NO_OPTION);
-        this.controller.setGameState(newGame == JOptionPane.NO_OPTION ? "Exit" : "");
-    }
+    public void offerNewGame() { appendText("Waiting for next step ..."); }
 }
