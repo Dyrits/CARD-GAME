@@ -1,4 +1,9 @@
-package com.openclassrooms.cardgame.model;
+package com.openclassrooms.cardgame.model.implementation;
+
+import com.openclassrooms.cardgame.model.Deck;
+import com.openclassrooms.cardgame.model.PlayingCard;
+import com.openclassrooms.cardgame.model.Rank;
+import com.openclassrooms.cardgame.model.Suit;
 
 import java.util.ArrayList;
 

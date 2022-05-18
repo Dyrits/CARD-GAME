@@ -1,9 +1,9 @@
 package com.openclassrooms.cardgame.game;
 
-import com.openclassrooms.cardgame.model.Player;
+import com.openclassrooms.cardgame.model.IPlayer;
 
 import java.util.List;
 
 public interface GameEvaluator {
-    public Player evaluate(List<Player> players);
+    public IPlayer evaluate(List<IPlayer> players);
 }

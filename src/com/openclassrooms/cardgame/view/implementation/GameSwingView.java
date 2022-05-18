@@ -1,7 +1,7 @@
 package com.openclassrooms.cardgame.view.implementation;
 
 import com.openclassrooms.cardgame.controller.GameController;
-import com.openclassrooms.cardgame.model.Player;
+import com.openclassrooms.cardgame.model.IPlayer;
 import com.openclassrooms.cardgame.view.GameView;
 
 import javax.swing.*;
@@ -79,7 +79,7 @@ public class GameSwingView implements GameView {
     }
 
     @Override
-    public void displayWinner(Player winner) {
+    public void displayWinner(IPlayer winner) {
         appendText(winner == null ? "It's a draw!" : "The winner is " + winner.getName() + "!");
     }
 

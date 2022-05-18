@@ -1,17 +1,14 @@
 package com.openclassrooms.cardgame.game.implementation;
 
-import com.openclassrooms.cardgame.model.Player;
+import com.openclassrooms.cardgame.model.IPlayer;
 
-import java.lang.reflect.Method;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class CardEvaluator {
-    public int getRankValue(Player player) { return player.getCard().getRank().getValue(); }
-    public int getSuitValue(Player player) { return player.getCard().getSuit().getValue(); }
+    public int getRankValue(IPlayer player) { return player.getCard().getRank().getValue(); }
+    public int getSuitValue(IPlayer player) { return player.getCard().getSuit().getValue(); }
 
     public interface Collector { int operate(List<Integer> values);}
 
@@ -32,7 +29,7 @@ public abstract class CardEvaluator {
         }
     }
 
-    public Player evaluate(List<Player> players, Collector collector) {
+    public IPlayer evaluate(List<IPlayer> players, Collector collector) {
         List<Integer> values = players.stream().map(this::getRankValue).collect(Collectors.toList());
         int value = collector.operate(values);
         if  (Collections.frequency(values, value) != 1) {
