@@ -2,12 +2,12 @@
 
 ---
 
-# Écrivez du code Java maintenable avec MVC et SOLID
+# Use MVC, SOLID Principles, and Design Patterns in Java
 
-Comment mesurer la qualité d'un code par rapport à un autre ?
+How can you measure the quality of one bit of code versus another?
 
-Existe-t-il un moyen de différencier un code correct d'un code médiocre (voire pire) ? Oui ! Et heureusement pour nous ! Les ingénieurs logiciels se sont accordés sur des bonnes pratiques permettant de rédiger un code de qualité. Elles sont présentées dans les principes de conception SOLID et dans le design pattern modèle-vue-contrôleur (MVC).
+Is there a way to recognize good code from mediocre (or worse)? Fortunately, there is! Software engineers have established guidelines for writing quality code. They are described in the SOLID design principles and model-view-controller (MVC) design pattern.
 
-Dans ce cours, vous apprendrez à écrire du code Java conforme à ces recommandations. Vous découvrirez également en quoi consiste chacun des principes SOLID, et vous les intégrerez à une application soumise à un processus d'amélioration continue. Pour finir, vous découvrirez et testerez les avantages du partage des responsabilités, comme mis en œuvre par le pattern MVC. Vous apprendrez également à implémenter d'autres design patterns.
+In this course, you will learn to write Java code that conforms to these guidelines. You will also see what each of the SOLID principles are, and then incorporate them into an ever-improving application. Finally, you will see and use the benefit of splitting responsibilities as described by the MVC pattern. You'll learn to integrate some other patterns, as well.
 
-Au terme de ce cours et après avoir développé une application conforme aux bonnes pratiques, vous aurez compris en quoi un code de qualité constitue un gage de robustesse.
+After completing this course, you will understand the measuring stick of quality code, after building an application following the guidelines.
